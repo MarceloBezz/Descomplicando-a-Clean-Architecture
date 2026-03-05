@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.alura.codechella.application.gateways.RepositorioDeUsuario;
 import br.com.alura.codechella.application.usecases.CadastrarUsuario;
+import br.com.alura.codechella.application.usecases.ListarUsuarios;
 import br.com.alura.codechella.infra.gateways.RepositorioDeUsuarioJPA;
 import br.com.alura.codechella.infra.gateways.UsuarioEntityMapper;
 import br.com.alura.codechella.infra.persistence.UsuarioRepository;
@@ -15,6 +16,11 @@ public class UsuarioConfig {
     @Bean
     CadastrarUsuario cadastrarUsuario(RepositorioDeUsuario repositorioDeUsuario) {
         return new CadastrarUsuario(repositorioDeUsuario);
+    }
+
+    @Bean
+    ListarUsuarios listarUsuarios(RepositorioDeUsuario repositorioDeUsuario) {
+        return new ListarUsuarios(repositorioDeUsuario);
     }
 
     @Bean
