@@ -23,4 +23,16 @@ public class UsuarioTest {
         
         Assertions.assertDoesNotThrow(() -> new Usuario(cpf, "Nome teste", LocalDate.now(), "email@email.com"));
     }
+
+    @Test
+    public void deveCriarUsuarioUsandoFabricaDeUsuario() {
+        FabricaDeUsuario fabrica = new FabricaDeUsuario();
+        Usuario usuario = fabrica.comNomeCpfNascimento("Nome qualquer","123.456.789-00",
+                LocalDate.parse("2000-01-01"));
+        usuario = fabrica.incluiEndereco("12345-999",45,"apto 201");
+
+        Assertions.assertEquals("Nome qualquer", usuario.getNome());
+        Assertions.assertEquals("123.456.789-00", usuario.getCpf());
+        Assertions.assertEquals("apto 201", usuario.getEndereco().getComplemento());
+    }
 }
