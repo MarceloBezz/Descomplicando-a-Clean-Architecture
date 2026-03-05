@@ -1,4 +1,4 @@
-package br.com.alura.codechella.domain;
+package br.com.alura.codechella.domain.entities.usuario;
 
 import java.time.LocalDate;
 
@@ -8,6 +8,17 @@ public class Usuario {
     private String nome;
     private LocalDate nascimento;
     private String email;
+
+    public Usuario(String cpf, String nome, LocalDate nascimento, String email) {
+        if (cpf == null || !cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")) {
+            throw new IllegalArgumentException("CPF no padrão incorreto!");
+        }
+        
+        this.cpf = cpf;
+        this.nome = nome;
+        this.nascimento = nascimento;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
