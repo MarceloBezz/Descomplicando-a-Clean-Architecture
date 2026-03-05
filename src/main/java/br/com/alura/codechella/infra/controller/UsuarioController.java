@@ -3,6 +3,7 @@ package br.com.alura.codechella.infra.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.alura.codechella.application.usecases.BuscarUsuarioPorId;
 import br.com.alura.codechella.application.usecases.CadastrarUsuario;
 import br.com.alura.codechella.application.usecases.ListarUsuarios;
 import br.com.alura.codechella.domain.entities.usuario.Usuario;
@@ -13,16 +14,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
     private final CadastrarUsuario cadastrarUsuario;
     private final ListarUsuarios listarUsuarios;
+    private final BuscarUsuarioPorId buscarUsuarioPorId;
 
-    public UsuarioController(CadastrarUsuario cadastrarUsuario, ListarUsuarios listarUsuarios) {
+    public UsuarioController(CadastrarUsuario cadastrarUsuario, ListarUsuarios listarUsuarios, BuscarUsuarioPorId buscarUsuarioPorId) {
         this.cadastrarUsuario = cadastrarUsuario;
         this.listarUsuarios = listarUsuarios;
+        this.buscarUsuarioPorId = buscarUsuarioPorId;
     }
 
     @PostMapping
@@ -44,5 +48,16 @@ public class UsuarioController {
                         usuario.getNascimento(), usuario.getEmail()))
                 .toList();
     }
+
+    @GetMapping("/{id}")
+    public UsuarioDTO listarPorId(@PathVariable Long id) {
+        try {
+            Usuario usuario = buscarUsuarioPorId.buscarUsuarioPorId(id);
+            return new UsuarioDTO(usuario.getNome(), usuario.getCpf(), usuario.getNascimento(), usuario.getEmail());
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+    
 
 }

@@ -7,4 +7,7 @@ import br.com.alura.codechella.domain.entities.usuario.Usuario;
 public interface RepositorioDeUsuario {
     Usuario cadastrarUsuario(Usuario usuario);
     List<Usuario> listarTodos();
+    Usuario buscarPorId(Long id);
+    Usuario atualizar(Usuario usuario);
+    void deletar();
 }

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.alura.codechella.application.gateways.RepositorioDeUsuario;
+import br.com.alura.codechella.application.usecases.BuscarUsuarioPorId;
 import br.com.alura.codechella.application.usecases.CadastrarUsuario;
 import br.com.alura.codechella.application.usecases.ListarUsuarios;
 import br.com.alura.codechella.infra.gateways.RepositorioDeUsuarioJPA;
@@ -21,6 +22,11 @@ public class UsuarioConfig {
     @Bean
     ListarUsuarios listarUsuarios(RepositorioDeUsuario repositorioDeUsuario) {
         return new ListarUsuarios(repositorioDeUsuario);
+    }
+
+    @Bean
+    BuscarUsuarioPorId BuscarUsuarioPorId(RepositorioDeUsuario repositorioDeUsuario) {
+        return new BuscarUsuarioPorId(repositorioDeUsuario);
     }
 
     @Bean

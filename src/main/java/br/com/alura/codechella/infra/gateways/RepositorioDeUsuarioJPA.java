@@ -32,5 +32,27 @@ public class RepositorioDeUsuarioJPA implements RepositorioDeUsuario {
                 .map(mapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public Usuario buscarPorId(Long id) {
+        UsuarioEntity entity = repository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("ID não encontrado!"));
+
+        return mapper.toDomain(entity);
+
+    }
+
+    @Override
+    public Usuario atualizar(Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+    }
+
+    @Override
+    public void deletar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+    }
     
 }
