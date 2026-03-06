@@ -44,9 +44,18 @@ public class RepositorioDeUsuarioJPA implements RepositorioDeUsuario {
     }
 
     @Override
-    public Usuario atualizar(Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+    public Usuario atualizar(Usuario usuario, Long id) {
+        var usuarioBD = repository.findById(id).get();
+        if (usuarioBD != null) {
+            usuarioBD.setNome(usuario.getNome());
+            usuarioBD.setEmail(usuario.getEmail());
+            usuarioBD.setNascimento(usuario.getNascimento());
+            usuarioBD.setCpf(usuario.getCpf());
+            repository.save(usuarioBD);
+            return mapper.toDomain(usuarioBD);
+        }
+
+        throw new RuntimeException("Usuário não encontrado!");
     }
 
     @Override

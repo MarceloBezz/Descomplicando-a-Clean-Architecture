@@ -3,6 +3,7 @@ package br.com.alura.codechella.infra.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.alura.codechella.application.usecases.AtualizaUsuario;
 import br.com.alura.codechella.application.usecases.BuscarUsuarioPorId;
 import br.com.alura.codechella.application.usecases.CadastrarUsuario;
 import br.com.alura.codechella.application.usecases.ListarUsuarios;
@@ -15,6 +16,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,11 +25,14 @@ public class UsuarioController {
     private final CadastrarUsuario cadastrarUsuario;
     private final ListarUsuarios listarUsuarios;
     private final BuscarUsuarioPorId buscarUsuarioPorId;
+    private final AtualizaUsuario atualizaUsuario;
 
-    public UsuarioController(CadastrarUsuario cadastrarUsuario, ListarUsuarios listarUsuarios, BuscarUsuarioPorId buscarUsuarioPorId) {
+    public UsuarioController(CadastrarUsuario cadastrarUsuario, ListarUsuarios listarUsuarios,
+                BuscarUsuarioPorId buscarUsuarioPorId, AtualizaUsuario atualizaUsuario) {
         this.cadastrarUsuario = cadastrarUsuario;
         this.listarUsuarios = listarUsuarios;
         this.buscarUsuarioPorId = buscarUsuarioPorId;
+        this.atualizaUsuario = atualizaUsuario;
     }
 
     @PostMapping
@@ -59,5 +65,14 @@ public class UsuarioController {
         }
     }
     
-
+    @PutMapping("/{id}")
+    public UsuarioDTO atualizar(@RequestBody UsuarioDTO dto, @PathVariable Long id) {
+        try {
+            var usuarioAtualizado = atualizaUsuario
+                    .atualizaUsuario(new Usuario(dto.cpf(), dto.nome(), dto.nascimento(), dto.email()), id);
+            return new UsuarioDTO(usuarioAtualizado.getNome(), usuarioAtualizado.getCpf(), usuarioAtualizado.getNascimento(), usuarioAtualizado.getEmail());
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
