@@ -1,0 +1,29 @@
+[Usuario{
+cpf= 123.456.789-00
+nome= Marcelo
+nascimento= 2026-03-06
+email= email@email.com
+endereco= null
+}
+, Usuario{
+cpf= 123.456.789-00
+nome= João
+nascimento= 2026-03-06
+email= email@email.com
+endereco= null
+}
+, Usuario{
+cpf= 123.456.789-00
+nome= Carlos
+nascimento= 2026-03-06
+email= email@email.com
+endereco= null
+}
+, Usuario{
+cpf= 123.456.789-00
+nome= Fernando
+nascimento= 2026-03-06
+email= email@email.com
+endereco= null
+}
+]

@@ -1,5 +1,7 @@
 package br.com.alura.codechella.infra.gateways;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,12 @@ public class RepositorioDeUsuarioEmArquivo implements RepositorioDeUsuario {
     @Override
     public void deletar(Long id) {
         usuarios.remove(buscarPorId(id));
+    }
+
+    public void gravaEmArquivo(String nomeArquivo) throws IOException {
+        FileWriter fileWriter = new FileWriter(nomeArquivo);
+        fileWriter.write(usuarios.toString());
+        fileWriter.close();
     }
 
 }

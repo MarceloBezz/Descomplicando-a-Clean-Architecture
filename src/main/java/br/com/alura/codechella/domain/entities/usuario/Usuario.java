@@ -23,6 +23,19 @@ public class Usuario {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return """
+                Usuario{
+                cpf= %s
+                nome= %s
+                nascimento= %s
+                email= %s
+                endereco= %s
+                }
+                """.formatted(cpf, nome, nascimento, email, endereco);
+    }
+
     public Endereco getEndereco() {
         return endereco;
     }
