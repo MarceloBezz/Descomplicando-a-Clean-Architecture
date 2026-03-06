@@ -12,6 +12,6 @@ public class AtualizaUsuario {
 
     public Usuario atualizaUsuario(Usuario usuario, Long id) {
         return repositorio.atualizar(usuario, id);
-}
+    }
 
 }

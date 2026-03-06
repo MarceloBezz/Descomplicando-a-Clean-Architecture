@@ -7,6 +7,7 @@ import br.com.alura.codechella.application.gateways.RepositorioDeUsuario;
 import br.com.alura.codechella.application.usecases.AtualizaUsuario;
 import br.com.alura.codechella.application.usecases.BuscarUsuarioPorId;
 import br.com.alura.codechella.application.usecases.CadastrarUsuario;
+import br.com.alura.codechella.application.usecases.DeletarUsuario;
 import br.com.alura.codechella.application.usecases.ListarUsuarios;
 import br.com.alura.codechella.infra.gateways.RepositorioDeUsuarioJPA;
 import br.com.alura.codechella.infra.gateways.UsuarioEntityMapper;
@@ -26,13 +27,18 @@ public class UsuarioConfig {
     }
 
     @Bean
-    BuscarUsuarioPorId BuscarUsuarioPorId(RepositorioDeUsuario repositorioDeUsuario) {
+    BuscarUsuarioPorId buscarUsuarioPorId(RepositorioDeUsuario repositorioDeUsuario) {
         return new BuscarUsuarioPorId(repositorioDeUsuario);
     }
 
     @Bean
-    AtualizaUsuario AtualizaUsuario(RepositorioDeUsuario repositorioDeUsuario) {
+    AtualizaUsuario atualizaUsuario(RepositorioDeUsuario repositorioDeUsuario) {
         return new AtualizaUsuario(repositorioDeUsuario);
+    }
+
+    @Bean
+    DeletarUsuario deletarUsuario(RepositorioDeUsuario repositorioDeUsuario) {
+        return new DeletarUsuario(repositorioDeUsuario);
     }
 
     @Bean

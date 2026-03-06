@@ -59,9 +59,13 @@ public class RepositorioDeUsuarioJPA implements RepositorioDeUsuario {
     }
 
     @Override
-    public void deletar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+    public void deletar(Long id) {
+        var usuarioBD = repository.findById(id).get();
+        if (usuarioBD != null) {
+            repository.deleteById(id);
+        } else {
+            throw new RuntimeException("Usuário não encontrado!");
+        }
     }
     
 }
